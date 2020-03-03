@@ -12,21 +12,15 @@ Source3:        README.md
 # Puppetlabs messed up with default paths
 Patch01:        0001-Fix-puppet-paths.patch
 BuildArch:      noarch
-BuildRequires:  puppet >= 6.9.0
-BuildRequires:  rubygem-fast_gettext >= 1.2.0
+BuildRequires:  rubygem-puppet
 BuildRequires:  rubygem-gettext >= 3.2.9
-BuildRequires:  rubygem-hocon >= 1.2.5
-BuildRequires:  rubygem-locale >= 2.1.2
 BuildRequires:  rubygem-puppetserver-ca >= 1.4.0
 BuildRequires:  rubygem-text >= 1.3.1
 
 Requires: puppet >= 6.9.0
 Requires: java-openjdk >= 1.8.0
 Requires: java-openjdk-headless >= 1.8.0
-Requires:  rubygem-fast_gettext >= 1.2.0
 Requires:  rubygem-gettext >= 3.2.9
-Requires:  rubygem-hocon >= 1.2.5
-Requires:  rubygem-locale >= 2.1.2
 Requires:  rubygem-puppetserver-ca >= 1.4.0
 Requires:  rubygem-text >= 1.3.1
 
@@ -46,6 +40,11 @@ along with obviously discrete elements like packages, services, and files.
 
 %install
 bash controller.sh %{buildroot}
+
+
+mkdir -p %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby
+ln -s /usr/share/gems/gems/puppet-6.13.0/lib %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby
+ln -s /usr/share/gems/gems/puppet-6.13.0/locales %{buildroot}/usr/share/puppetlabs/puppet/locales
 
 # using /usr/share/gems breaks puppetserver, so we are making its repository of gems
 # this is ugly, and generates lots of warnings in rpmlint, but required by puppetserver now.
