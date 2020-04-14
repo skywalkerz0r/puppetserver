@@ -6,13 +6,15 @@ License:        ASL 2.0
 URL:            http://puppetlabs.com
 Source0:        http://downloads.puppetlabs.com/puppet/%{name}-%{version}.tar.gz
 Source1:        http://downloads.puppetlabs.com/puppet/%{name}-%{version}.tar.gz.asc
-Source2:        %{name}.logrotate
-Source3:        README.md
+Source2:        README.md
 
 # Puppetlabs messed up with default paths
 Patch01:        0001-Fix-puppet-paths.patch
 BuildArch:      noarch
 BuildRequires:  puppet >= 6.9.0
+BuildRequires:  ruby
+BuildRequires:  ruby-devel
+BuildRequires:  ruby
 BuildRequires:  rubygem-fast_gettext >= 1.2.0
 BuildRequires:  rubygem-gettext >= 3.2.9
 BuildRequires:  rubygem-hocon >= 1.2.5
@@ -23,12 +25,15 @@ BuildRequires:  rubygem-text >= 1.3.1
 Requires: puppet >= 6.9.0
 Requires: java-openjdk >= 1.8.0
 Requires: java-openjdk-headless >= 1.8.0
+Requires:  ruby
+Requires:  ruby-devel
 Requires:  rubygem-fast_gettext >= 1.2.0
 Requires:  rubygem-gettext >= 3.2.9
 Requires:  rubygem-hocon >= 1.2.5
 Requires:  rubygem-locale >= 2.1.2
 Requires:  rubygem-puppetserver-ca >= 1.4.0
 Requires:  rubygem-text >= 1.3.1
+
 
 %description
 Puppet lets you centrally manage every important aspect of your system using a
@@ -105,8 +110,7 @@ mkdir -p %{buildroot}/etc/puppetlabs/code/environments/production/manifest %{bui
 mkdir %{buildroot}/usr/share/puppetlabs/server/docs
 cp %{_sourcedir}/README.md %{buildroot}/usr/share/puppetlabs/server/docs
 
-mkdir -p %{buildroot}/etc/logrotate.d
-cp %{_sourcedir}/%{name}.logrotate %{buildroot}/etc/logrotate.d/%{name}
+install -Dp -m0644 ext/puppetserver.logrotate.conf %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
 %files
 %{_bindir}/puppetserver
