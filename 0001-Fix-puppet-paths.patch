@@ -142,7 +142,7 @@ index a7a2be0..21d77f5
 +DESTDIR="$basepath" bash install.sh install_redhat
 +DESTDIR="$basepath" bash install.sh systemd_redhat
 diff --git a/ext/bin/puppetserver b/ext/bin/puppetserver
-index 3cb051e..57b052f 100644
+index 3cb051e..0204004 100644
 --- a/ext/bin/puppetserver
 +++ b/ext/bin/puppetserver
 @@ -13,7 +13,7 @@ elif [ `uname` == "OpenBSD" ] ; then
@@ -155,7 +155,7 @@ index 3cb051e..57b052f 100644
  else
      echo "You seem to be missing some important configuration files; could not find /etc/default/puppetserver or /etc/sysconfig/puppetserver" >&2
 diff --git a/ext/build-scripts/install-vendored-gems.sh b/ext/build-scripts/install-vendored-gems.sh
-index b009a1c..6eee922 100644
+index b009a1c..2bb0c92 100644
 --- a/ext/build-scripts/install-vendored-gems.sh
 +++ b/ext/build-scripts/install-vendored-gems.sh
 @@ -14,7 +14,7 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
@@ -187,7 +187,7 @@ index c1be3d9..a7d1e98 100644
  require 'puppetserver/ca/cli'
  
 diff --git a/ext/cli/foreground b/ext/cli/foreground
-index e0eca9f..0de52ff 100644
+index e0eca9f..ee0553f 100644
 --- a/ext/cli/foreground
 +++ b/ext/cli/foreground
 @@ -1,6 +1,6 @@
@@ -199,7 +199,7 @@ index e0eca9f..0de52ff 100644
  
  if [ ! -e "${INSTALL_DIR}/ezbake-functions.sh" ]; then
 diff --git a/ext/cli/reload b/ext/cli/reload
-index 757f3e5..3dfe673 100644
+index 757f3e5..07e0fef 100644
 --- a/ext/cli/reload
 +++ b/ext/cli/reload
 @@ -1,7 +1,7 @@
@@ -212,7 +212,7 @@ index 757f3e5..3dfe673 100644
  timeout="$reload_timeout"
  realname="puppetserver"
 diff --git a/ext/cli/start b/ext/cli/start
-index 8ab1fa1..529ee86 100644
+index 8ab1fa1..954bcd7 100644
 --- a/ext/cli/start
 +++ b/ext/cli/start
 @@ -3,7 +3,7 @@ set +e
@@ -225,7 +225,7 @@ index 8ab1fa1..529ee86 100644
  
  realname="puppetserver"
 diff --git a/ext/cli_defaults/cli-defaults.sh b/ext/cli_defaults/cli-defaults.sh
-index 4c89c6b..ee034e4 100644
+index 4c89c6b..ae02ce1 100644
 --- a/ext/cli_defaults/cli-defaults.sh
 +++ b/ext/cli_defaults/cli-defaults.sh
 @@ -1,7 +1,7 @@
@@ -239,7 +239,7 @@ index 4c89c6b..ee034e4 100644
 -CLASSPATH="${CLASSPATH}:/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/opt/puppetlabs/server/data/puppetserver/jars/*"
 +CLASSPATH="${CLASSPATH}:/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/usr/share/puppetlabs/server/data/puppetserver/jars/*"
 diff --git a/ext/config/conf.d/puppetserver.conf b/ext/config/conf.d/puppetserver.conf
-index 7253338..3a7a836 100644
+index 7253338..b1882dd 100644
 --- a/ext/config/conf.d/puppetserver.conf
 +++ b/ext/config/conf.d/puppetserver.conf
 @@ -2,16 +2,16 @@
@@ -247,7 +247,7 @@ index 7253338..3a7a836 100644
      # Where the puppet-agent dependency places puppet, facter, etc...
      # Puppet server expects to load Puppet from this location
 -    ruby-load-path: [/opt/puppetlabs/puppet/lib/ruby/vendor_ruby]
-+    ruby-load-path: [/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby]
++    ruby-load-path: [/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby, "/usr/share/gems/gems/puppetserver-ca-1.5.0/lib"]
  
      # This setting determines where JRuby will install gems.  It is used for loading gems,
      # and also by the `puppetserver gem` command line tool.
@@ -258,7 +258,7 @@ index 7253338..3a7a836 100644
      # the gem-home directory as well as any other directories that gems can be loaded
      # from (including the vendored gems directory for gems that ship with puppetserver)
 -    gem-path: [${jruby-puppet.gem-home}, "/opt/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/opt/puppetlabs/puppet/lib/ruby/vendor_gems"]
-+    gem-path: [${jruby-puppet.gem-home}, "/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems"]
++    gem-path: [${jruby-puppet.gem-home}, "/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems", "/usr/share/gems"]
  
      # PLEASE NOTE: Use caution when modifying the below settings. Modifying
      # these settings will change the value of the corresponding Puppet settings
@@ -274,7 +274,7 @@ index 7253338..3a7a836 100644
      # (optional) path to puppet run dir; if not specified, will use
      # /var/run/puppetlabs/puppetserver
 diff --git a/ext/default b/ext/default
-index dc78c98..3aa332c 100644
+index dc78c98..258aaa5 100644
 --- a/ext/default
 +++ b/ext/default
 @@ -17,11 +17,11 @@ TK_ARGS=""
@@ -292,7 +292,7 @@ index dc78c98..3aa332c 100644
  # SERVICE_STOP_RETRIES can be set here to alter the default stop timeout in
  # seconds.  For systemd, the shorter of this setting or 'TimeoutStopSec' in
 diff --git a/ext/fpm.rb b/ext/fpm.rb
-index f903a1d..9f9bed0 100644
+index f903a1d..d76efe1 100644
 --- a/ext/fpm.rb
 +++ b/ext/fpm.rb
 @@ -137,9 +137,9 @@ if options.sources.empty?
@@ -307,7 +307,8 @@ index f903a1d..9f9bed0 100644
                        end
                      when :debian, :ubuntu
                        if options.dist == 'trusty' #trusty is the only sysv deb we build for right now
-@@ -159,8 +159,8 @@ termini_opts = Array('')
+@@ -158,9 +158,9 @@ shared_opts = Array('')
+ termini_opts = Array('')
  
  options.app_logdir = "/var/log/puppetlabs/#{options.realname}"
 -options.app_rundir = "/var/run/puppetlabs/#{options.realname}"
@@ -393,7 +394,7 @@ index f903a1d..9f9bed0 100644
  # We should either open a issue/PR/etc to make this allowable in fpm, or we
  # should refactor how we're building this package to explicitly set the root/root
 diff --git a/ext/redhat/puppetserver.service b/ext/redhat/puppetserver.service
-index cc1d475..66a18a9 100644
+index cc1d475..2204fed 100644
 --- a/ext/redhat/puppetserver.service
 +++ b/ext/redhat/puppetserver.service
 @@ -34,9 +34,9 @@ TasksMax=4915
@@ -410,7 +411,7 @@ index cc1d475..66a18a9 100644
  KillMode=process
  
 diff --git a/install.sh b/install.sh
-index f379f90..1343bfe 100644
+index f379f90..9d82bfd 100644
 --- a/install.sh
 +++ b/install.sh
 @@ -22,14 +22,14 @@ confdir=${confdir:=/etc}

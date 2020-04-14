@@ -52,53 +52,8 @@ along with obviously discrete elements like packages, services, and files.
 %install
 bash controller.sh %{buildroot}
 
-# using /usr/share/gems breaks puppetserver, so we are making its repository of gems
-# this is ugly, and generates lots of warnings in rpmlint, but required by puppetserver now.
-mkdir -p %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems \
-%{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin \
-%{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/build_info \
-%{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/cache \
-%{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/doc \
-%{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/extensions \
-%{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems \
-%{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications
-ln -sf /usr/bin/hocon %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin
-ln -sf /usr/bin/rmsgcat %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin
-ln -sf /usr/bin/rmsgfmt %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin
-ln -sf /usr/bin/rmsginit %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin
-ln -sf /usr/bin/rmsgmerge %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin
-ln -sf /usr/bin/rxgettext %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin
-
-ln -s /usr/share/gems/gems/concurrent-ruby-* %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-ln -s /usr/share/gems/gems/fast_gettext-* %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-ln -s /usr/share/gems/gems/gettext-* %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-ln -s /usr/share/gems/gems/hocon-* %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-ln -s /usr/share/gems/gems/locale-* %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-ln -s /usr/share/gems/gems/semantic_puppet-* %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-ln -s /usr/share/gems/gems/text-* %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-
-ln -s /usr/share/gems/specifications/concurrent-ruby-*.gemspec %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications/
-ln -s /usr/share/gems/specifications/fast_gettext-*.gemspec %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications/
-ln -s /usr/share/gems/specifications/gettext-*.gemspec %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications/
-ln -s /usr/share/gems/specifications/hocon-*.gemspec %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications/
-ln -s /usr/share/gems/specifications/locale-*.gemspec %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications/
-ln -s /usr/share/gems/specifications/semantic_puppet-*.gemspec %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications/
-ln -s /usr/share/gems/specifications/text-*.gemspec %{buildroot}/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications/
-
 mkdir -p %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/
 ln -s /usr/share/gems/gems/puppetserver-ca-*/lib/puppetserver %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/
-
-mkdir -p %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems \
-%{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/bin \
-%{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/build_info \
-%{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/cache \
-%{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/doc \
-%{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/extensions \
-%{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/gems \
-%{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/specifications
-ln -s /usr/share/gems/gems/puppetserver-ca-*/exe/puppetserver-ca %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/bin
-ln -s /usr/share/gems/gems/puppetserver-ca-* %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/gems
-ln -s /usr/share/gems/specifications/puppetserver-ca-*.gemspec %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems/specifications
 
 # install of puppetserver in /usr/bin
 mkdir -p %{buildroot}/usr/bin/
