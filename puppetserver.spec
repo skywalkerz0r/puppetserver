@@ -81,31 +81,10 @@ install -Dp -m0644 ext/puppetserver.logrotate.conf %{buildroot}%{_sysconfdir}/lo
 %dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver
 %dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/jars
 %dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems
-%dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin
-%dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/build_info
-%dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/cache
-%dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/doc
-%dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/extensions
-%dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-%dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin/hocon
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin/rmsgcat
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin/rmsgfmt
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin/rmsginit
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin/rmsgmerge
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/bin/rxgettext
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/gems
-%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems/specifications
 
 %attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_ruby/puppetserver
 
 %dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems
-%dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems/bin
-%dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems/gems
-%dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems/specifications
-%attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems/bin/puppetserver-ca
-%attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems/gems
-%attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems/specifications
 
 %config(noreplace) %dir %attr(-, puppet, puppet) %{_sysconfdir}/puppetlabs/code
 %config(noreplace) %dir %attr(-, puppet, puppet) %{_sysconfdir}/puppetlabs/code/environments
