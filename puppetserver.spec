@@ -52,6 +52,8 @@ along with obviously discrete elements like packages, services, and files.
 %install
 bash controller.sh %{buildroot}
 
+mkdir -p %{buildroot}/%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems
+
 mkdir -p %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/
 ln -s /usr/share/gems/gems/puppetserver-ca-*/lib/puppetserver %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/
 
