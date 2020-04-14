@@ -239,7 +239,7 @@ index 4c89c6b..ae02ce1 100644
 -CLASSPATH="${CLASSPATH}:/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/opt/puppetlabs/server/data/puppetserver/jars/*"
 +CLASSPATH="${CLASSPATH}:/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/usr/share/puppetlabs/server/data/puppetserver/jars/*"
 diff --git a/ext/config/conf.d/puppetserver.conf b/ext/config/conf.d/puppetserver.conf
-index 7253338..b1882dd 100644
+index 7253338..2ed5f04 100644
 --- a/ext/config/conf.d/puppetserver.conf
 +++ b/ext/config/conf.d/puppetserver.conf
 @@ -2,16 +2,16 @@
@@ -247,7 +247,7 @@ index 7253338..b1882dd 100644
      # Where the puppet-agent dependency places puppet, facter, etc...
      # Puppet server expects to load Puppet from this location
 -    ruby-load-path: [/opt/puppetlabs/puppet/lib/ruby/vendor_ruby]
-+    ruby-load-path: [/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby, "/usr/share/gems/gems/puppetserver-ca-1.5.0/lib"]
++    ruby-load-path: [/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby, "/usr/share/gems/gems/puppetserver-ca-1.5.0/lib", "/usr/share/ruby/vendor_ruby"]
  
      # This setting determines where JRuby will install gems.  It is used for loading gems,
      # and also by the `puppetserver gem` command line tool.
