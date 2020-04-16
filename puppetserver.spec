@@ -1,5 +1,5 @@
 Name:           puppetserver
-Version:        6.7.1
+Version:        6.10.0
 Release:        1%{?dist}
 Summary:        A network tool for managing many disparate systems
 License:        ASL 2.0
