@@ -245,7 +245,7 @@ index 7253338..f360124 100644
      # Where the puppet-agent dependency places puppet, facter, etc...
      # Puppet server expects to load Puppet from this location
 -    ruby-load-path: [/opt/puppetlabs/puppet/lib/ruby/vendor_ruby]
-+    ruby-load-path: [/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby, "/usr/share/gems/gems/puppetserver-ca-1.5.0/lib", "/usr/share/ruby/vendor_ruby"]
++    ruby-load-path: [/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby, "/usr/share/gems/gems/puppetserver-ca-1.7.0/lib", "/usr/share/ruby/vendor_ruby"]
  
      # This setting determines where JRuby will install gems.  It is used for loading gems,
      # and also by the `puppetserver gem` command line tool.

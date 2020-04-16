@@ -19,7 +19,7 @@ BuildRequires:  rubygem-fast_gettext >= 1.2.0
 BuildRequires:  rubygem-gettext >= 3.2.9
 BuildRequires:  rubygem-hocon >= 1.2.5
 BuildRequires:  rubygem-locale >= 2.1.2
-BuildRequires:  rubygem-puppetserver-ca >= 1.4.0
+BuildRequires:  rubygem-puppetserver-ca = 1.7.0
 BuildRequires:  rubygem-text >= 1.3.1
 
 Requires: puppet >= 6.9.0
@@ -31,7 +31,7 @@ Requires:  rubygem-fast_gettext >= 1.2.0
 Requires:  rubygem-gettext >= 3.2.9
 Requires:  rubygem-hocon >= 1.2.5
 Requires:  rubygem-locale >= 2.1.2
-Requires:  rubygem-puppetserver-ca >= 1.4.0
+Requires:  rubygem-puppetserver-ca = 1.7.0
 Requires:  rubygem-text >= 1.3.1
 
 
