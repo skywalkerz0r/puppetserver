@@ -237,31 +237,30 @@ index 4c89c6b..ae02ce1 100644
 -CLASSPATH="${CLASSPATH}:/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/opt/puppetlabs/server/data/puppetserver/jars/*"
 +CLASSPATH="${CLASSPATH}:/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/usr/share/puppetlabs/server/data/puppetserver/jars/*"
 diff --git a/ext/config/conf.d/puppetserver.conf b/ext/config/conf.d/puppetserver.conf
-index 7253338..d6183a3 100644
+index 7253338..f360124 100644
 --- a/ext/config/conf.d/puppetserver.conf
 +++ b/ext/config/conf.d/puppetserver.conf
-@@ -2,16 +2,17 @@
+@@ -2,16 +2,16 @@
  jruby-puppet: {
      # Where the puppet-agent dependency places puppet, facter, etc...
      # Puppet server expects to load Puppet from this location
 -    ruby-load-path: [/opt/puppetlabs/puppet/lib/ruby/vendor_ruby]
 +    ruby-load-path: [/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby, "/usr/share/gems/gems/puppetserver-ca-1.5.0/lib", "/usr/share/ruby/vendor_ruby"]
-+
  
      # This setting determines where JRuby will install gems.  It is used for loading gems,
      # and also by the `puppetserver gem` command line tool.
 -    gem-home: /opt/puppetlabs/server/data/puppetserver/jruby-gems
-+    gem-path: [${jruby-puppet.gem-home}, "/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems", "/usr/share/gems"]
++    gem-home: /usr/share/puppetlabs/server/data/puppetserver/jruby-gems
  
      # This setting defines the complete "GEM_PATH" for jruby.  If set, it should include
      # the gem-home directory as well as any other directories that gems can be loaded
      # from (including the vendored gems directory for gems that ship with puppetserver)
 -    gem-path: [${jruby-puppet.gem-home}, "/opt/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/opt/puppetlabs/puppet/lib/ruby/vendor_gems"]
-+    gem-path: [${jruby-puppet.gem-home}, "/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems"]
++    gem-path: [${jruby-puppet.gem-home}, "/usr/share/puppetlabs/server/data/puppetserver/vendored-jruby-gems", "/usr/share/puppetlabs/puppet/lib/ruby/vendor_gems", "/usr/share/gems"]
  
      # PLEASE NOTE: Use caution when modifying the below settings. Modifying
      # these settings will change the value of the corresponding Puppet settings
-@@ -33,8 +34,8 @@ jruby-puppet: {
+@@ -33,8 +33,8 @@ jruby-puppet: {
      master-code-dir: /etc/puppetlabs/code
  
      # (optional) path to puppet var dir; if not specified, will use
