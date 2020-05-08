@@ -235,7 +235,7 @@ index 4c89c6b..ae02ce1 100644
  fi
  
 -CLASSPATH="${CLASSPATH}:/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/opt/puppetlabs/server/data/puppetserver/jars/*"
-+CLASSPATH="${CLASSPATH}:/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/facter.jar:/usr/share/puppetlabs/server/data/puppetserver/jars/*"
++CLASSPATH="${CLASSPATH}:/usr/share/ruby/vendor_ruby/facter.jar:/usr/share/puppetlabs/server/data/puppetserver/jars/*"
 diff --git a/ext/config/conf.d/puppetserver.conf b/ext/config/conf.d/puppetserver.conf
 index 7253338..f360124 100644
 --- a/ext/config/conf.d/puppetserver.conf
