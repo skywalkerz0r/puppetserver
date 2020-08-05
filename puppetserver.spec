@@ -7,6 +7,7 @@ URL:            http://puppetlabs.com
 Source0:        http://downloads.puppetlabs.com/puppet/%{name}-%{version}.tar.gz
 Source1:        http://downloads.puppetlabs.com/puppet/%{name}-%{version}.tar.gz.asc
 Source2:        README.md
+Source3:	LICENSE.md
 
 # Puppetlabs messed up with default paths
 Patch01:        0001-Fix-puppet-paths.patch
@@ -19,7 +20,7 @@ BuildRequires:  rubygem-fast_gettext >= 1.2.0
 BuildRequires:  rubygem-gettext >= 3.2.9
 BuildRequires:  rubygem-hocon >= 1.2.5
 BuildRequires:  rubygem-locale >= 2.1.2
-BuildRequires:  rubygem-puppetserver-ca = 1.7.0
+BuildRequires:  rubygem-puppetserver-ca = 1.8.0
 BuildRequires:  rubygem-text >= 1.3.1
 
 Requires: puppet >= 6.9.0
@@ -31,9 +32,8 @@ Requires:  rubygem-fast_gettext >= 1.2.0
 Requires:  rubygem-gettext >= 3.2.9
 Requires:  rubygem-hocon >= 1.2.5
 Requires:  rubygem-locale >= 2.1.2
-Requires:  rubygem-puppetserver-ca = 1.7.0
+Requires:  rubygem-puppetserver-ca = 1.8.0
 Requires:  rubygem-text >= 1.3.1
-
 
 %description
 Puppet lets you centrally manage every important aspect of your system using a
@@ -54,7 +54,6 @@ bash controller.sh %{buildroot}
 
 mkdir -p %{buildroot}/%{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems
 mkdir -p %{buildroot}/%{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems
-
 mkdir -p %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/
 ln -s /usr/share/gems/gems/puppetserver-ca-*/lib/puppetserver %{buildroot}/usr/share/puppetlabs/puppet/lib/ruby/vendor_ruby/
 
@@ -67,6 +66,7 @@ mkdir -p %{buildroot}/etc/puppetlabs/code/environments/production/manifest %{bui
 
 mkdir %{buildroot}/usr/share/puppetlabs/server/docs
 cp %{_sourcedir}/README.md %{buildroot}/usr/share/puppetlabs/server/docs
+cp %{_sourcedir}/LICENSE.md %{buildroot}/usr/share/puppetlabs/server/docs
 
 install -Dp -m0644 ext/puppetserver.logrotate.conf %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
@@ -75,7 +75,6 @@ install -Dp -m0644 ext/puppetserver.logrotate.conf %{buildroot}%{_sysconfdir}/lo
 %{_exec_prefix}/lib/systemd/system/puppetserver.service
 %{_exec_prefix}/lib/tmpfiles.d/puppetserver.conf
 %attr(-, puppet, puppet) %{_datadir}/puppetlabs/bin/puppetserver
-
 %dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/server
 %dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/bin
 %attr(-, puppet, puppet) %{_datadir}/puppetlabs/server/apps
@@ -84,14 +83,10 @@ install -Dp -m0644 ext/puppetserver.logrotate.conf %{buildroot}%{_sysconfdir}/lo
 %dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver
 %dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/jars
 %dir %attr(0755, puppet, puppet) %{_datadir}/puppetlabs/server/data/puppetserver/vendored-jruby-gems
-
 %attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_ruby/puppetserver
-
 %dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/puppet/lib/ruby/vendor_gems
-
 %config(noreplace) %dir %attr(-, puppet, puppet) %{_sysconfdir}/puppetlabs/code
 %config(noreplace) %dir %attr(-, puppet, puppet) %{_sysconfdir}/puppetlabs/code/environments
-
 %config(noreplace) %dir %attr(-, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver
 %config(noreplace) %dir %attr(-, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver/conf.d
 %config(noreplace) %attr(644, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver/conf.d/auth.conf
@@ -103,19 +98,16 @@ install -Dp -m0644 ext/puppetserver.logrotate.conf %{buildroot}%{_sysconfdir}/lo
 %config(noreplace) %attr(644, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver/conf.d/webserver.conf
 %config(noreplace) %attr(644, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver/logback.xml
 %config(noreplace) %attr(644, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver/request-logging.xml
-
 %config(noreplace) %dir %attr(-, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver/services.d
 %config(noreplace) %attr(644, puppet, puppet) %{_sysconfdir}/puppetlabs/puppetserver/services.d/ca.cfg
-
 %config(noreplace) %{_sysconfdir}/sysconfig/puppetserver
 %config(noreplace) %attr(0644, root, root) %{_sysconfdir}/logrotate.d/%{name}
-
-%doc %dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/server/docs
-%doc %attr(-, puppet, puppet) %{_datadir}/puppetlabs/server/docs/README.md
-
 %ghost %dir %attr(0755, puppet, puppet) %{_rundir}/puppetlabs/puppetserver
 %dir %attr(0755, puppet, puppet) %{_localstatedir}/log/puppetlabs/puppetserver
+%doc %dir %attr(-, puppet, puppet) %{_datadir}/puppetlabs/server/docs
+%doc %attr(-, puppet, puppet) %{_datadir}/puppetlabs/server/docs/README.md
+%license %attr(-, puppet, puppet) %{_datadir}/puppetlabs/server/docs/LICENSE.md
 
 %changelog
-* Wed Nov 06 2019 Breno Fernandes <brandfbb@gmail.com> - 6.7.1-1
+* Wed Aug 05 2020 Breno Fernandes <brandfbb@gmail.com> - 6.10.0-1
 - Build of puppetserver 6.
